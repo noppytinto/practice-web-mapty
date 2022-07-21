@@ -1,3 +1,43 @@
+# my ignores
+**/.idea/
+**/.DS_Store
+**/node_modules/
+**/coverage/
+**/.vscode/
+
+# env files
+*.env
+
+# webpack
+**/dist/
+
+# react
+**/build/
+
+# next
+.next
+
+# cmake files
+**/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Testing/
+**/.cmake/
+**/cmake-build-debug/
+**/build.ninja
+**/.ninja_deps
+**/.ninja_log
+
+# figma, sketch, xd
+*.sketch
+*.fig
+*.xd
+
+# Avoid your project being littered with annoying .DS_Store files!
+.DS_Store
+.prettierignore
+
 # Logs
 logs
 *.log
