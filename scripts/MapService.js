@@ -18,9 +18,9 @@ class MapService {
     }
 
     obtainPosition() {
-        const positionPromise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(
-                (position) =>  {
+                (position) => {
                     this._loadMap(position);
                     resolve(position)
                     // this._loadMapWithListener(position, onSuccess);
@@ -29,9 +29,7 @@ class MapService {
                     reject('could not get your position');
                 }
             );
-        })
-
-        return positionPromise;
+        });
     }
 
     toggleElevationField() {}
@@ -102,8 +100,7 @@ class MapService {
         const map = L.map('map').setView([coords.latitude, coords.longitude], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        })
-            .addTo(map);
+        }).addTo(map);
 
         return map;
     }

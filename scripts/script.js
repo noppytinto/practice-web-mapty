@@ -23,8 +23,8 @@ const inputElevation = document.querySelector('.form__input--elevation');
 ////////////////////////////////////////////////
 const months =
     ['January', 'February', 'March',
-    'April', 'May', 'June', 'July', 'August',
-    'September', 'October', 'November', 'December'];
+        'April', 'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'];
 
 class App {
     // public
@@ -123,28 +123,32 @@ class App {
     _createWorkout(event) {
         // reading data from form
         const workoutType = inputType.value;
-        // console.log(workoutType);
-        switch (workoutType) {
-            case 'cycling':
-                this._createCyclingWorkout(event);
-                break;
-            case 'running':
-                this._createRunningWorkout(event);
-                break;
-        }
 
-        console.log(this.workouts);
+        try {
+            switch (workoutType) {
+                case 'cycling':
+                    this._createCyclingWorkout(event);
+                    break;
+                case 'running':
+                    this._createRunningWorkout(event);
+                    break;
+            }
+
+            console.log(this.workouts);
+        } catch (err) {
+            throw new Error(err);
+        }
     }
 
     _createCyclingWorkout(event) {
         const distance = Number.parseFloat(inputDistance.value.trim());
         const duration = Number.parseFloat(inputDuration.value.trim());
         const elevation = Number.parseFloat(inputElevation.value.trim());
-        console.log('cycling workout mode ', distance,' ', duration,' ', elevation);
+        console.log('cycling workout mode ', distance, ' ', duration, ' ', elevation);
 
-        if ( ! this._cyclingDataAreValid(distance, duration, elevation)) {
+        if (!this._cyclingDataAreValid(distance, duration, elevation)) {
             alert('the value have to be a positive number')
-            return;
+            throw new Error('invalid workout data');
         }
 
 
@@ -167,12 +171,12 @@ class App {
         const cadence = Number.parseFloat(inputDuration.value.trim());
         // let cadence = inputCadence.value.trim();
         // const regEx = /(\d)+(\/)(\d)+/; // selects all patterns 'number/number'
-        if ( ! this._runningDataAreValid(distance, duration, cadence)) {
+        if (!this._runningDataAreValid(distance, duration, cadence)) {
             alert('the value have to be a positive number')
-            return;
+            throw new Error('invalid workout data');
         }
 
-        console.log('running workout mode ', distance,' ', duration,' ', cadence);
+        console.log('running workout mode ', distance, ' ', duration, ' ', cadence);
 
         // [cadence] = cadence.match(regEx);
         const newWorkout = new Running(Object.assign({}, mapService.coords), distance, duration, cadence);
@@ -210,7 +214,7 @@ class App {
         liWorkout.classList.add('workout', 'workout--cycling');
         liWorkout.setAttribute('data-id', workout.id);
         h2WorkoutTitle.classList.add('workout__title');
-        const monthName = new Intl.DateTimeFormat("en-US", { month: "long" }).format;
+        const monthName = new Intl.DateTimeFormat("en-US", {month: "long"}).format;
         const longName = monthName(workout.date); // "July"
         h2WorkoutTitle.textContent = `Cycling on ${longName} ${workout.date.getDay()}`;
 
@@ -238,7 +242,7 @@ class App {
         liWorkout.classList.add('workout', 'workout--running');
         liWorkout.setAttribute('data-id', workout.id);
         h2WorkoutTitle.classList.add('workout__title');
-        const monthName = new Intl.DateTimeFormat("en-US", { month: "long" }).format;
+        const monthName = new Intl.DateTimeFormat("en-US", {month: "long"}).format;
         const longName = monthName(workout.date); // "July"
         h2WorkoutTitle.textContent = `Running on ${longName} ${workout.date.getDay()}`
 
@@ -334,10 +338,16 @@ app.addOnMapClickListener((event) => {
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     console.log(`current position, lat:${app.mapService.coords.latitude} long:${app.mapService.coords.longitude}`);
-    app._createWorkout(event);
 
-    // hide form
-    form.classList.toggle('hidden');
+    try {
+        app._createWorkout(event);
+
+        // hide form
+        form.classList.toggle('hidden');
+    } catch (err) {
+        console.error(err);
+    }
+
 });
 
 // add on click listener on list item
@@ -360,6 +370,7 @@ form.addEventListener('keydown', ev => {
     }
 });
 
+// save workouts before exit
 window.addEventListener('beforeunload', ev => {
     localStorage.setItem('workouts', JSON.stringify(app.workouts));
 });
