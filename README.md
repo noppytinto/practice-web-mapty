@@ -25,5 +25,6 @@ Mapty is a Web App, that allow users to track the current running/cycling activi
 
 <br/>
 
-## Technologies:
+## Challanges:
+- complex javascript code
 - Leaflet map library
