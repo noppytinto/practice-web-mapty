@@ -1,7 +1,7 @@
 # Mapty
 
 
-### Link: [live link](https://noppytinto.github.io/practice-web-mapty/)
+### Link: [visit website](https://noppytinto.github.io/practice-web-mapty/)
 
 <br/>
 
