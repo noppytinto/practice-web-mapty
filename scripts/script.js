@@ -169,7 +169,7 @@ class App {
     _createRunningWorkout(event) {
         const distance = Number.parseFloat(inputDistance.value.trim());
         const duration = Number.parseFloat(inputDuration.value.trim());
-        const cadence = Number.parseFloat(inputDuration.value.trim());
+        const cadence = Number.parseFloat(inputCadence.value.trim());
         // let cadence = inputCadence.value.trim();
         // const regEx = /(\d)+(\/)(\d)+/; // selects all patterns 'number/number'
         if (!this._runningDataAreValid(distance, duration, cadence)) {
@@ -243,9 +243,10 @@ class App {
         liWorkout.classList.add('workout', 'workout--running');
         liWorkout.setAttribute('data-id', workout.id);
         h2WorkoutTitle.classList.add('workout__title');
-        const monthName = new Intl.DateTimeFormat("en-US", {month: "long"}).format;
+        const monthName = (date) => new Intl.DateTimeFormat("en-US", {month: "long"}).format(date);
+        console.log('DAY:', workout.date.getDate());
         const longName = monthName(workout.date); // "July"
-        h2WorkoutTitle.textContent = `Running on ${longName} ${workout.date.getDay()}`
+        h2WorkoutTitle.textContent = `Running on ${longName} ${workout.date.getDate()}`
 
         // assembling
         liWorkout.append(h2WorkoutTitle);
@@ -304,6 +305,8 @@ class App {
         // const regEx = /(\d)+(\/)(\d)+/; // selects all patterns 'number/number'
         // console.log('reg expr: ', inputCadence.value.trim().match(regEx));
         // const isValidCadence = regEx.test(cadence);
+        
+        console.log('cadence', cadence);
 
         return isValidDistance && isValidDuration && isValidCadence;
     }
