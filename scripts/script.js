@@ -17,6 +17,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const clearButton = document.querySelector('.clear-workouts');
 
 ////////////////////////////////////////////////
 // DECLARATIONS
@@ -368,6 +369,12 @@ form.addEventListener('keydown', ev => {
     if (ev.key === 'Escape' && app.formOpened) {
         app.hideForm();
     }
+});
+
+clearButton.addEventListener('click', (ev) => {
+    app.workouts = [];
+    containerWorkouts.textContent = '';
+    app.mapService.removeMarkers();
 });
 
 // save workouts before exit

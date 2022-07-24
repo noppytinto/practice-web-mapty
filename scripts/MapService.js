@@ -4,6 +4,7 @@ class MapService {
     #mapEvent;
     coords;
     #currentTempMarker;
+    markers;
 
     //
     constructor() {
@@ -11,6 +12,8 @@ class MapService {
             latitude: 0,
             longitude: 0,
         };
+
+        this.markers = []
 
 
         // getting position for the 1st time
@@ -74,6 +77,8 @@ class MapService {
     addMarker(coords) {
         this.#currentTempMarker = L.marker([coords.latitude, coords.longitude])
             .addTo(this.#map)
+
+        this.markers.push(this.#currentTempMarker);
         return this.#currentTempMarker;
     }
 
@@ -103,6 +108,10 @@ class MapService {
         }).addTo(map);
 
         return map;
+    }
+
+    removeMarkers() {
+        this.markers.forEach(marker => marker.remove());
     }
 
     _assembleCustomPopup(className) {
