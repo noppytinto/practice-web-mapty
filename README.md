@@ -9,7 +9,7 @@ this project is part of the learning process, the code is mine but the idea belo
 
 ## Description:
 
-Mapty is a Web App, that allow users to track their running/cycling activities on an interactive map.
+Mapty is a Web App, that allows users to track their running/cycling activities on an interactive map.
 
 <br/>
 
