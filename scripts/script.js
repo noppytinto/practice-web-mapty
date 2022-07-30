@@ -18,6 +18,8 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const clearButton = document.querySelector('.clear-workouts');
+const okButton = document.querySelector('.form__btn--positive');
+const cancelButton = document.querySelector('.form__btn--negative');
 
 ////////////////////////////////////////////////
 // DECLARATIONS
@@ -374,11 +376,18 @@ form.addEventListener('keydown', ev => {
     }
 });
 
+cancelButton.addEventListener('click', ev => {
+    if (app.formOpened) {
+        app.hideForm();
+    }
+});
+
 clearButton.addEventListener('click', (ev) => {
     app.workouts = [];
     containerWorkouts.textContent = '';
     app.mapService.removeMarkers();
 });
+
 
 // save workouts before exit
 window.addEventListener('beforeunload', ev => {
