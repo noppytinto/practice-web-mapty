@@ -20,6 +20,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 const clearButton = document.querySelector('.clear-workouts');
 const okButton = document.querySelector('.form__btn--positive');
 const cancelButton = document.querySelector('.form__btn--negative');
+const toast = document.querySelector('.toast');
 
 ////////////////////////////////////////////////
 // DECLARATIONS
@@ -323,7 +324,15 @@ const mapService = new MapService();
 const app = new App(mapService);
 
 // start map service AND get initial position
+toast.classList.toggle('toast--show');
 const position = await app.obtainPosition();
+toast.classList.toggle('toast--show');
+
+if (position) {
+}
+else {
+    alert('could not get your position');
+}
 
 // restore any previous workouts data saved in local storage
 app.restorePreviousData();

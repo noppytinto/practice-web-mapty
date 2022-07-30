@@ -4,6 +4,7 @@
 
   --color-dark--1: #2d3439;
   --color-dark--2: #42484d;
+  --color-dark--2--rgb: rgb(66, 72, 77);
   --color-light--1: #aaa;
   --color-light--2: #ececec;
   --color-light--3: rgb(214, 222, 224);
@@ -60,6 +61,7 @@ a:visited {
   height: 77vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 }
 
 .workouts::-webkit-scrollbar {
@@ -259,4 +261,26 @@ a:visited {
 }
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
+}
+
+.toast {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  display: none;
+}
+
+.toast--show {
+  display: flex;
+}
+
+.toast__text {
+  padding: 1em 2em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 2em;
+  background-color: rgba(66, 72, 77, .95);
 }

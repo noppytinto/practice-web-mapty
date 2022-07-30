@@ -26,10 +26,9 @@ class MapService {
                 (position) => {
                     this._loadMap(position);
                     resolve(position)
-                    // this._loadMapWithListener(position, onSuccess);
                 }
                 , () => {
-                    reject('could not get your position');
+                    reject(null);
                 }
             );
         });
